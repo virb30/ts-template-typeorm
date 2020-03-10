@@ -50,3 +50,4 @@ configured .gitignore to exclude node_modules, .env and coverage from commits
 ### Others
 
 - Project specific dependencies, such as database drivers, must be manually installed/configured
+- customize the application port and host throught env
