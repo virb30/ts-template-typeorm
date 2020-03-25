@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpileOnly src/server.ts",
+    "typeorm": "ts-node ./node_modules/typeorm/cli.js",
+    "pretest": "set NODE_ENV=test&&yarn typeorm migration:run",
+    "test": "set NODE_ENV=test&&jest --runInBand --detectOpenHandles",
+    "posttest": "set NODE_ENV=test&&yarn typeorm migration:revert"
+  },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
@@ -43,11 +50,9 @@
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.24"
   },
-  "scripts": {
-    "dev": "ts-node-dev --respawn --transpileOnly src/server.ts",
-    "typeorm": "ts-node ./node_modules/typeorm/cli.js",
-    "pretest": "set NODE_ENV=test&&yarn typeorm migration:run",
-    "test": "set NODE_ENV=test&&jest --runInBand --detectOpenHandles",
-    "posttest": "set NODE_ENV=test&&yarn typeorm migration:revert"
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
