@@ -5,19 +5,24 @@
   "license": "MIT",
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
+    "@entity-factory/core": "^0.2.1",
+    "@entity-factory/typeorm": "^0.2.1",
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.3",
     "@types/jest": "^25.1.4",
     "@types/node": "^13.9.0",
     "@typescript-eslint/eslint-plugin": "^2.23.0",
     "@typescript-eslint/parser": "^2.23.0",
+    "commitizen": "^4.0.3",
     "commitlint": "^8.3.5",
     "cross-env": "^7.0.2",
+    "cz-conventional-changelog": "^3.1.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.10.0",
@@ -41,8 +46,8 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpileOnly src/server.ts",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
-    "pretest": "yarn typeorm migration:run --config ormconfig.test.js",
-    "test": "jest",
-    "posttest": "yarn typeorm migration:revert --config ormconfig.test.js"
+    "pretest": "set NODE_ENV=test&&yarn typeorm migration:run",
+    "test": "set NODE_ENV=test&&jest --runInBand --detectOpenHandles",
+    "posttest": "set NODE_ENV=test&&yarn typeorm migration:revert"
   }
 }
