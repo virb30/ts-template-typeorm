@@ -12,6 +12,7 @@ This project is prettended to be a template configured with the most common sett
 - commitlint
 - commitizen
 - express
+- tsconfig-paths
 
 ### Detailed configurations
 
@@ -63,3 +64,4 @@ configured .gitignore to exclude node_modules, .env and coverage from commits
 
 - Project specific dependencies, such as database drivers, must be manually installed/configured
 - customize the application port and host throught .env files or directly on environment
+- tsconfig-paths configuration example
